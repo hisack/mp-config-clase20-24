@@ -1,0 +1,49 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext{
+    helidonVersion = '2.5.1'
+}
+
+dependencies {
+
+    // import Helidon dependency management
+    implementation platform("io.helidon:helidon-dependencies:${project.helidonVersion}")
+    /////servidor
+    ///implementation 'io.helidon.microprofile.bundles:helidon-microprofile'
+    //implementation 'io.helidon.microprofile.server:helidon-microprofile-server'
+    implementation group: 'io.helidon.microprofile.server', name: 'helidon-microprofile-server'
+    implementation group: 'io.helidon.microprofile.config', name: 'helidon-microprofile-config'
+    //CONSUL
+    implementation group: 'org.microprofile-ext.config-ext', name: 'configsource-consul', version: '2.0.1'
+
+    runtimeOnly 'org.jboss:jandex'
+
+    implementation 'com.orbitz.consul:consul-client:1.5.3'
+
+    //Health de MicroProfile
+    // https://mvnrepository.com/artifact/io.helidon.microprofile.health/helidon-microprofile-health
+    implementation group: 'io.helidon.microprofile.health', name: 'helidon-microprofile-health'
+    //chekeos propios de helidon, informacion adicional del servidor
+    // https://mvnrepository.com/artifact/io.helidon.health/helidon-health-checks
+    implementation group: 'io.helidon.health', name: 'helidon-health-checks'
+
+}
+
+sourceSets {
+    main {
+        output.resourcesDir = file("${buildDir}/classes/java/main")
+    }
+}
+
+
+

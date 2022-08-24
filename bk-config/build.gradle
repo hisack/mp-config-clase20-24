@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'application'
+    id "io.freefair.lombok" version "6.5.0.2"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    helidonversion = '2.5.1'
+}
+
+dependencies {
+// import Helidon dependency management
+    implementation platform("io.helidon:helidon-dependencies:${project.helidonversion}")
+    implementation group: 'io.helidon.microprofile.health', name: 'helidon-microprofile-health'
+    implementation group: 'io.helidon.health', name: 'helidon-health-checks'
+    implementation group: 'io.helidon.microprofile.server', name: 'helidon-microprofile-server'
+    implementation 'io.helidon.microprofile.config:helidon-microprofile-config'
+    implementation group: 'org.microprofile-ext.config-ext', name: 'configsource-consul', version: '2.0.1'
+    implementation 'com.orbitz.consul:consul-client:1.5.3'
+    runtimeOnly 'org.jboss:jandex'
+}
+sourceSets {
+    main{
+        output.resourcesDir = file("${buildDir}/classes/java/main")
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

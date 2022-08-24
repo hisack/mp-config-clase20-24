@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'io.quarkus' version '2.1.2.Final'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext{
+    quarkusVersion='2.1.2.Final'
+}
+
+dependencies {
+    implementation enforcedPlatform("io.quarkus.platform:quarkus-bom:${quarkusVersion}")
+    implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-resteasy-reactive'
+  //  implementation group: 'io.quarkiverse.microprofile.server', name: 'quarkus-microprofile-server'
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
